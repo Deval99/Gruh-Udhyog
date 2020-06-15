@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reglog">जुड़िये / प्रवेश कीजिए</string>
+    <string name="gruh">गृह</string>
+    <string name="udhyog">उद्योग</string>
+    <string name="skip">ऐसे ही आगे बढ़े</string>
+    <string name="restart_app">एप को वापिस खोले !</string>
+    <string name="enterPhn">आपका फोन नंबर डाले</string>
+    <string name="reqOtp">OTP भेजे</string>
+    <string name="chooseCat">प्रोडक्ट के प्रकार चुनिए</string>
+    <string name="vHistory">भूतकाल बताये</string>
+    <string name="myOrd">मेरे ऑर्डर्स</string>
+    <string name="askMicP">आपको Voice Search के लिए माइक्रोफोन इस्तेमाल करने की अनुमती देनी होगी</string>
+    <string name="askMic">आपको Voice Search के लिए माइक्रोफोन इस्तेमाल करने की अनुमती देनी होगी, settings>apps>Gruh Udhyog>permissions>record audio</string>
+    <string name="searchTxt">ढूंढिए प्रोडक्ट या सर्विसेज</string>
+    <string name="listening">सुन रहा है.....</string>
+    <string name="holdSpk">माइक बटन दबा के बोलिये</string>
+    <string name="nv_prpo">PRIVACY POLICY</string>
+    <string name="nv_logout">LOG OUT</string>
+    <string name="nv_abtus">ABOUT US</string>
+</resources>

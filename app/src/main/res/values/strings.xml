@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name" translatable="false">Gruh Udhyog</string>
+    <string name="en" translatable="false">English</string>
+    <string name="hi" translatable="false">हिन्दी</string>
+    <string name="gu" translatable="false">ગુજરાતી</string>
+    <string name="reglog">Register/Login</string>
+    <string name="select" translatable="false">SELECT</string>
+    <string name="lang" translatable="false">language / ભાષા / भाषा</string>
+    <string name="skip">Skip</string>
+    <string name="bgImage">Background Image</string>
+    <string name="gruh">GRUH</string>
+    <string name="udhyog">UDHYOG</string>
+    <string name="restart_app">Please restart app !</string>
+    <string name="enterPhn">Enter Your Phone Number</string>
+    <string name="reqOtp">Request OTP</string>
+    <string name="enterNum_desc">Enter Your Number</string>
+    <string name="chooseCat">Choose a category to continue</string>
+    <string name="vHistory">View History</string>
+    <string name="myOrd">My Orders</string>
+
+    <string name="askMic">"You need to give permission to record audio from settings>apps>Gruh Udhyog>permissions>record audio, in order to use Mic feature !"</string>
+    <string name="askMicP">"You need to give permission to record audio in order to use Mic feature !"</string>
+    <string name="denyPerm">As you have denied permission, Mic option is no longer available, However you can enable it from settings.</string>
+    <string name="searchTxt">SEARCH FOR PRODUCT and SERVICES</string>
+    <string name="listening">Listening...</string>
+    <string name="holdSpk">Hold mic button and speak</string>
+    <string name="title_activity_options_left">OptionsLeft</string>
+    <string name="nv_hlpfb"><![CDATA[HELP & FEEDBACK]]></string>
+    <string name="nv_prpo">PRIVACY POLICY</string>
+    <string name="nv_logout">LOG OUT</string>
+    <string name="nv_abtus">ABOUT US</string>
+
+</resources>

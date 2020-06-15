@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "706240549644",
+    "firebase_url": "https://gruh-udhyog-a123d.firebaseio.com",
+    "project_id": "gruh-udhyog-a123d",
+    "storage_bucket": "gruh-udhyog-a123d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706240549644:android:0271443e749b8e3dbcaf29",
+        "android_client_info": {
+          "package_name": "com.example.gruhudhyog"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706240549644-6p25btfqeb08n4pne653f8nli3gerb9m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gruhudhyog",
+            "certificate_hash": "a4cc9214b7cd76bb9501feeb0426531cabb5e400"
+          }
+        },
+        {
+          "client_id": "706240549644-dtt3mi4sscl4h5jj9v7asrhvpgnr1ckd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-iroZwEq72amO3nZE0t8F80c3n1Z6ZQs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706240549644-dtt3mi4sscl4h5jj9v7asrhvpgnr1ckd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
