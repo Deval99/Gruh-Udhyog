@@ -14,7 +14,7 @@
     <string name="enterPhn">Enter Your Phone Number</string>
     <string name="reqOtp">Request OTP</string>
     <string name="enterNum_desc">Enter Your Number</string>
-    <string name="chooseCat">Choose a category to continue</string>
+    <string name="chooseCat">Category</string>
     <string name="vHistory">View History</string>
     <string name="myOrd">My Orders</string>
 

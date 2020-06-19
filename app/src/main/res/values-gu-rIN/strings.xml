@@ -7,7 +7,7 @@
     <string name="restart_app">એપ ને ફરી થી ખોલો !</string>
     <string name="enterPhn">તમારો ફોન નંબર લખો</string>
     <string name="reqOtp">OTP મોકલો</string>
-    <string name="chooseCat">પ્રોડક્ટ ના પ્રકાર પસંદ કરો</string>
+    <string name="chooseCat">પ્રકાર</string>
     <string name="vHistory">ભૂતકાળ બતાવો</string>
     <string name="myOrd">મારા ઓર્ડર્સ</string>
     <string name="askMic">Voice Search માટે તમારે માઈક્રોફોન ઉપયોગ કરવાની અનુમતી આપવી પડશે, settings>apps>Gruh Udhyog>permissions>record audio</string>

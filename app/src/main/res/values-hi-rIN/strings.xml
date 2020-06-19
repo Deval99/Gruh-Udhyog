@@ -7,7 +7,7 @@
     <string name="restart_app">एप को वापिस खोले !</string>
     <string name="enterPhn">आपका फोन नंबर डाले</string>
     <string name="reqOtp">OTP भेजे</string>
-    <string name="chooseCat">प्रोडक्ट के प्रकार चुनिए</string>
+    <string name="chooseCat">प्रकार</string>
     <string name="vHistory">भूतकाल बताये</string>
     <string name="myOrd">मेरे ऑर्डर्स</string>
     <string name="askMicP">आपको Voice Search के लिए माइक्रोफोन इस्तेमाल करने की अनुमती देनी होगी</string>

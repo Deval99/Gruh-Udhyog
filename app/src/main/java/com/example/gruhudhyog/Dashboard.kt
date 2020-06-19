@@ -1,54 +1,60 @@
 package com.example.gruhudhyog
 
 //import android.widget.Toolbar
-import android.Manifest.permission.RECORD_AUDIO
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.Build
+import android.graphics.Color
 import android.os.Bundle
-import android.speech.RecognitionListener
-import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
 import android.util.Log
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.database.*
-import com.google.firebase.storage.FileDownloadTask
-import com.google.firebase.storage.FirebaseStorage
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_search.*
-import java.io.File
-import java.util.*
+import org.jetbrains.annotations.NotNull
 
-
-class Dashboard : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+//
+class Dashboard : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener{
     lateinit var drawerLayout: DrawerLayout
     lateinit var sharedPref : SharedPreferences
     lateinit var sharedPrefEdit : SharedPreferences.Editor
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        var selectedFrag : Fragment = HomeFrag()
+        when(item.itemId){
+            R.id.db_bot_nav_home -> {
+                selectedFrag = HomeFrag()
+            }
+            R.id.db_bot_nav_search -> {
+                selectedFrag = SearchFrag()
+            }
+            R.id.db_bot_nav_orders -> {
+                selectedFrag = OrdersFrag()
+            }
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.db_frag, selectedFrag).commit()
+        return true
+    }
 
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
 
@@ -58,28 +64,13 @@ class Dashboard : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
 
         setContentView(R.layout.activity_dashboard)
 
-        searchBtnDb.setOnClickListener{
-            startActivity(Intent(this@Dashboard, SearchActivity::class.java))
-        }
-        micBtnDb.setOnClickListener{
-            startActivity(Intent(this@Dashboard, SearchActivity::class.java))
-        }
-        editSearchDb.setOnClickListener{
-            startActivity(Intent(this@Dashboard, SearchActivity::class.java))
-        }
 
         sharedPref = getSharedPreferences("com.example.gruhudhyog", Context.MODE_PRIVATE)
         sharedPrefEdit = sharedPref.edit()
 
-        Toast.makeText(this, sharedPref.getString("loginNum", null).toString(), Toast.LENGTH_SHORT).show()
-
-
+        //FOR LEFT NAVIGATION MENU OPEN
         var drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
 
-        //TEMP
-
-
-        //FOR LEFT NAVIGATION MENU OPEN
         optLeftOpen.setOnClickListener {
             Toast.makeText(this, "Haa !!!", Toast.LENGTH_SHORT).show()
             drawer.openDrawer(GravityCompat.START)
@@ -90,7 +81,9 @@ class Dashboard : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             startActivity(inte)
         }
 
-
+        var bottomNav : BottomNavigationView = findViewById(R.id.db_bot_nav_layout)
+        supportFragmentManager.beginTransaction().replace(R.id.db_frag, HomeFrag()).commit()
+        bottomNav.setOnNavigationItemSelectedListener(this)
 
         //================================================================================================================
         //================================================================================================================
@@ -114,10 +107,6 @@ class Dashboard : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
         //=================================================================================================================================
         //============================================On Click Listeners NavDrawer=========================================================
         //=================================================================================================================================
-        nv_logout.setOnClickListener{
-            drawer.closeDrawer(GravityCompat.START)
-            Toast.makeText(this, "Logout pending", Toast.LENGTH_SHORT).show()
-        }
         nv_abtus.setOnClickListener{
             drawer.closeDrawer(GravityCompat.START)
             Toast.makeText(this, "About us pending", Toast.LENGTH_SHORT).show()
@@ -136,33 +125,32 @@ class Dashboard : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             sharedPrefEdit.commit()
             startActivity(Intent(this, LanguageSelect::class.java))
         }
-
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.mgmtPayment -> {
-                Toast.makeText(this, "Payment Management", Toast.LENGTH_SHORT).show()
-            }
-            R.id.GotoSett -> {
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
-            }
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
-    }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            101 -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Toast.makeText(this@Dashboard, "Permission Granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@Dashboard, getString(R.string.denyPerm), Toast.LENGTH_LONG).show()
-                }
-                return
-            }
-        }
-    }
+//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.mgmtPayment -> {
+//                Toast.makeText(this, "Payment Management", Toast.LENGTH_SHORT).show()
+//            }
+//            R.id.GotoSett -> {
+//                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//        drawerLayout.closeDrawer(GravityCompat.START)
+//        return true
+//    }
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+//        when (requestCode) {
+//            101 -> {
+//                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+//                    Toast.makeText(this@Dashboard, "Permission Granted", Toast.LENGTH_SHORT).show()
+//                } else {
+//                    Toast.makeText(this@Dashboard, getString(R.string.denyPerm), Toast.LENGTH_LONG).show()
+//                }
+//                return
+//            }
+//        }
+//    }
 
 
 }
