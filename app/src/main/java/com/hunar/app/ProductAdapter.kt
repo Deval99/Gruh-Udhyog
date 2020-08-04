@@ -1,4 +1,4 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -10,11 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.gruhudhyog.Product
-import com.example.gruhudhyog.R
 
 class ProductAdapter(
     private val mCtx: Context,
@@ -32,7 +29,7 @@ class ProductAdapter(
         viewType: Int
     ): ProductViewHolder {
         val view: View =
-            LayoutInflater.from(mCtx).inflate(R.layout.recyclerview_product, parent, false)
+            LayoutInflater.from(mCtx).inflate(R.layout.topselling_product, parent, false)
         return ProductViewHolder(view)
     }
 
@@ -44,9 +41,12 @@ class ProductAdapter(
         val id = idListNew[position]
         val prod: Product = artistList[position]
 
-        holder.textViewName.setText(prod.name)
-        holder.textViewCategory.text = "Category: " + prod.category
-        holder.textViewName.text = "Name: " + prod.name
+
+        holder.textViewName.setText(prod.prodName)
+//        holder.textViewCategory.text = "Category: " + prod.category
+
+//        Log.d("ASD", "X"+prod.prodCategory)
+//        holder.textViewName.text = "Name: " + prod.prodName
         var myBitmap = BitmapFactory.decodeFile(filesDir+"/ProductImages/"+id)
         if (myBitmap==null){
             Log.d("ABC", "Error aavi "+filesDir+"/ProductImages/"+id)
@@ -61,14 +61,12 @@ class ProductAdapter(
     inner class ProductViewHolder(itemView: View) :
         ViewHolder(itemView) {
         var textViewName: TextView
-        var textViewCategory: TextView
         var imgView: ImageView
 
 
         init {
             imgView = itemView.findViewById(R.id.prodImg)
             textViewName = itemView.findViewById(R.id.tv_name)
-            textViewCategory = itemView.findViewById(R.id.tv_category)
         }
     }
 

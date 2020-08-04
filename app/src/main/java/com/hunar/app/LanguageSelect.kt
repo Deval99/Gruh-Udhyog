@@ -1,17 +1,13 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.yariksoffice.lingver.Lingver
 import kotlinx.android.synthetic.main.activity_language_select.*
 import java.util.*
 
@@ -25,7 +21,7 @@ class LanguageSelect : AppCompatActivity() {
         setContentView(R.layout.activity_language_select)
 
 
-        sharedPref = getSharedPreferences("com.example.gruhudhyog", Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
 
         Toast.makeText(this, sharedPref.getString("loginNum", null).toString(), Toast.LENGTH_SHORT).show()
 

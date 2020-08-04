@@ -1,4 +1,4 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,17 +6,16 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.gruhudhyog.submitOtp
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.PhoneAuthProvider.*
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_submit_otp.*
 import java.util.concurrent.TimeUnit
 
@@ -35,7 +34,7 @@ class submitOtp : AppCompatActivity() {
         setContentView(R.layout.activity_submit_otp)
         mAuth=FirebaseAuth.getInstance()
 
-        sharedPref = getSharedPreferences("com.example.gruhudhyog", Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
         sharedPrefEdi = sharedPref.edit()
 
         var myIntent = getIntent()
@@ -62,6 +61,26 @@ class submitOtp : AppCompatActivity() {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
             if (task.isSuccessful){
                 // Sign in success, update UI with the signed-in user's information
+                var db = FirebaseFirestore.getInstance()
+                Log.d("TAG", FirebaseAuth.getInstance().uid.toString())
+                db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).get()
+                    .addOnSuccessListener { userSnapshot ->
+                        if(userSnapshot.get("userName")==null){
+                            Log.e("TAG", "userName is null (No user data available) Adding Data (Default type is Customer)")
+
+                            db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).set(
+                                hashMapOf("userPhoneNum" to phoneNumber, "userType" to "customer"))
+                                .addOnSuccessListener { Log.d("TAG", "Adding user in db is successful") }
+                                .addOnFailureListener { Log.e("TAG", "Adding user in db failed !$it") }
+                        }else{
+                            sharedPrefEdi.putString("userName", userSnapshot.get("userName").toString())
+                            sharedPrefEdi.putString("userAddress", userSnapshot.get("userAddress").toString())
+                            sharedPrefEdi.commit()
+                        }
+                    }
+                    .addOnFailureListener {
+                        Log.e("TAG", "Getting users failed ! $it")
+                    }
 
                 sharedPrefEdi.putString("loginNum", phoneNumber)
                 sharedPrefEdi.commit()

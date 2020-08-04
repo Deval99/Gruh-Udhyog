@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gruhudhyog">
+    package="com.hunar.app">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".SearchActivity"></activity>
-        <!-- android:name="android.support.v4.content.FileProvider" -->
+        <activity android:name=".getUserInfo"></activity>
+        <activity android:name=".SubmitOrder" />
+        <activity android:name=".SearchActivity" /> <!-- android:name="android.support.v4.content.FileProvider" -->
         <activity android:name=".EditProfile" />
-        <activity android:name=".Dashboard" />
+        <activity
+            android:name=".Dashboard"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".submitOtp" />
         <activity android:name=".getPhnum" />
         <activity android:name=".LanguageSelect" />

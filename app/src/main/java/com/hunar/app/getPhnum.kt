@@ -1,4 +1,4 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.view.get
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_get_phnum.*
 
 class getPhnum : AppCompatActivity() {
@@ -17,12 +17,14 @@ class getPhnum : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_get_phnum)
 
-        sharedPref = getSharedPreferences("com.example.gruhudhyog", Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
         sharedPrefEdit = sharedPref.edit()
 
         submit.setOnClickListener {
             var phoneNumber = "+"+countryC.selectedCountryCode+editPhoneNum.text.toString()
 //            Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show()
+
+
             var inte = Intent(this@getPhnum, submitOtp::class.java)
             inte.putExtra("pn",phoneNumber)
             startActivity(inte)

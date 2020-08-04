@@ -18,4 +18,13 @@
     <string name="nv_prpo">PRIVACY POLICY</string>
     <string name="nv_logout">LOG OUT</string>
     <string name="nv_abtus">ABOUT US</string>
+    <string name="catBtnFood"><![CDATA[Food & Snacks]]></string>
+    <string name="beauty_and_health"><![CDATA[Beauty & Health]]></string>
+    <string name="puja_spiritual"><![CDATA[Puja & Spiritual]]></string>
+    <string name="bgImage">Background Image</string>
+    <string name="enterNum_desc">Enter Your Number</string>
+    <string name="denyPerm">As you have denied permission, Mic option is no longer available, However you can enable it from settings.</string>
+    <string name="title_activity_options_left">OptionsLeft</string>
+    <string name="nv_hlpfb"><![CDATA[HELP & FEEDBACK]]></string>
+    <string name="db_category_pickle"><![CDATA[Pickles, Masala & Chutneys]]></string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 class SliderItem {
     var description: String? = null

@@ -1,9 +1,9 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -15,13 +15,12 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -36,27 +35,50 @@ class EditProfile : AppCompatActivity() {
     lateinit var sharedPref : SharedPreferences
     lateinit var phoneNum : String
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_profile)
 
-        sharedPref = getSharedPreferences("com.example.gruhudhyog", Context.MODE_PRIVATE)
+
+        sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
 
 
         if(sharedPref.getString("loginNum", null) == null) {
-            Toast.makeText(this, "Please Login !", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Please Login !")
+                .setPositiveButton("Ok",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // FIRE ZE MISSILES!
+                        finish()
+                    })
+            val alertDialog = builder.create()
+            alertDialog.show()
             finish()
             return
         }else {
+
+            setContentView(R.layout.activity_edit_profile)
+
+            var db = FirebaseFirestore.getInstance()
+            db.collection("users").document(FirebaseAuth.getInstance().uid.toString())
+                .get()
+                .addOnSuccessListener {
+                    if(it.get("userName")!=null){
+                        etName.setText(it.get("userName").toString())
+                    }
+                    if(it.get("userAddress")!=null) {
+                        etAddress.setText(it.get("userAddress").toString())
+                    }
+                }
+
+
             phoneNum = sharedPref.getString("loginNum", "abc") as String
 
             strref = FirebaseStorage.getInstance().getReference("ProfilePic")
 
 
-            val imgFile: File? = File("/data/user/0/com.example.gruhudhyog/files/ProfilePic.jpg")
+            val imgFile: File? = File("/data/user/0/com.hunar.app/files/ProfilePic.jpg")
+
+
 
             if (imgFile != null && imgFile!!.exists()) {
                 val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
@@ -122,7 +144,39 @@ class EditProfile : AppCompatActivity() {
             }
 
             editProfSbmt.setOnClickListener {
+
+                if(etName.text.toString().trim() == "" && etAddress.text.toString().trim() == ""){
+                    etName.setError("This is a mandatory field !")
+                    etAddress.setError("This is a mandatory field !")
+                    return@setOnClickListener
+                }else if(etName.text.toString().trim() == ""){
+                    etName.setError("This is a mandatory field !")
+                    return@setOnClickListener
+                }else if(etAddress.text.toString().trim() == ""){
+                    etAddress.setError("This is a mandatory field !")
+                    return@setOnClickListener
+                }
+
+
+                var db = FirebaseFirestore.getInstance()
+                db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).update(
+                    hashMapOf("userName" to etName.text.toString()) as Map<String, Any>
+                )
+                    .addOnSuccessListener { Log.d("TAG", "UserName Updated") }
+                    .addOnFailureListener { Toast.makeText(this, "userName add Failed"+it.toString(), Toast.LENGTH_SHORT).show() }
+                db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).update(
+                    hashMapOf("userAddress" to etAddress.text.toString()) as Map<String, Any>
+                )
+                    .addOnSuccessListener { Log.d("TAG", "UserAddress Updated") }
+                    .addOnFailureListener { Toast.makeText(this, "userAddress add Failed"+it.toString(), Toast.LENGTH_SHORT).show() }
+//                uploadFile()
+                var sharedPrefEdit = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE).edit()
+                sharedPrefEdit.putString("userName", etName.text.toString())
+                sharedPrefEdit.putString("userAddress", etAddress.text.toString())
+                sharedPrefEdit.apply()
+
                 uploadFile()
+                finish()
             }
         }
     }
@@ -134,7 +188,6 @@ class EditProfile : AppCompatActivity() {
     }
     private fun uploadFile(){
         if(imguri==null) {
-            Toast.makeText(this, "Image Uri Null !", Toast.LENGTH_SHORT).show()
             return
         }
         var ref : StorageReference = strref.child(phoneNum+"."+getExt(imguri!!))

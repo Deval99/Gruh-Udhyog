@@ -1,58 +1,93 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.activity_search.editSearch
-import kotlinx.android.synthetic.main.activity_search.searchBtn
-import kotlinx.android.synthetic.main.activity_search.*
 import java.io.File
 import java.util.*
 
-class SearchActivity : AppCompatActivity() {
+class SearchFrag : Fragment(){
+
     lateinit var dbRef : DatabaseReference
     var prodList = ArrayList<Product>()
     var idList = ArrayList<String>()
     lateinit var prodAdapter : ProductAdapter
+    lateinit var progressBar : ProgressBar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+    lateinit var searchBtn : ImageView
+    lateinit var recView : RecyclerView
+    lateinit var micBtn : ImageButton
+    lateinit var editSearch : EditText
+    lateinit var view_2: View;
+    private var myData: List<String>? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        var view : View = inflater.inflate(R.layout.db_search_frag, container, false)
+        view_2=view;
+        progressBar = view.findViewById<ProgressBar>(R.id.progressBar_dbSearch)
+        searchBtn = view.findViewById<ImageView>(R.id.searchBtn)
+        recView = view.findViewById<RecyclerView>(R.id.recView)
+        micBtn = view.findViewById<ImageButton>(R.id.micBtn)
+        editSearch = view.findViewById<EditText>(R.id.editSearch)
+
+
+        val db = Firebase.firestore
+
+
+        db.collection("seller")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    Log.d("TAG", "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("TAG", "Error getting documents.", exception)
+            }
+
         progressBar.visibility = View.INVISIBLE
-        searchBtn.setOnClickListener{
-            var str : String = editSearch.text.toString()
-            Log.d("ABC", str.trim())
-            var query : Query = dbRef.orderByChild("name").startAt(str.trim().toLowerCase().capitalize()).endAt(str.trim().toLowerCase().capitalize()+"\uf8ff")
-
-            query.addListenerForSingleValueEvent(valueEventListener)
-            searchBtn.visibility = View.INVISIBLE
-            progressBar.visibility = View.VISIBLE
-        }
-        val llm = LinearLayoutManager(this)
+//        searchBtn.setOnClickListener{
+//            var str : String = editSearch.text.toString()
+//            Log.d("ABC", str.trim())
+//            var query : Query = dbRef.orderByChild("prodName").startAt(str.trim().toLowerCase().capitalize()).endAt(str.trim().toLowerCase().capitalize()+"\uf8ff")
+//
+//            query.addListenerForSingleValueEvent(valueEventListener)
+//            searchBtn.visibility = View.INVISIBLE
+//            progressBar.visibility = View.VISIBLE
+//        }
+        val llm = LinearLayoutManager(view.context)
         llm.orientation = LinearLayoutManager.VERTICAL
         recView.layoutManager = llm
 
-        prodAdapter =   ProductAdapter(this, prodList, idList, filesDir.path.toString())
+        prodAdapter =   ProductAdapter(view.context, prodList, idList, view.context.filesDir.path.toString())
         recView.adapter = prodAdapter
         dbRef = FirebaseDatabase.getInstance().reference.child("Product")
 
@@ -60,7 +95,7 @@ class SearchActivity : AppCompatActivity() {
         //===============================================================================================================================================
         //===============================================================================================================================================
 
-        if (ContextCompat.checkSelfPermission(this@SearchActivity,
+        if (ContextCompat.checkSelfPermission(view.context,
                 Manifest.permission.RECORD_AUDIO
             ) == PermissionChecker.PERMISSION_GRANTED
         ) {
@@ -68,7 +103,7 @@ class SearchActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 askPerm("Permission", getString(R.string.askMicP))
             } else {
-                val builder = AlertDialog.Builder(this@SearchActivity)
+                val builder = AlertDialog.Builder(view.context)
                 builder.setTitle("Permission")
                 builder.setMessage(getString(R.string.askMic))
                 builder.setPositiveButton("Ok") { dialogInterface, which ->
@@ -79,7 +114,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        val mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(view.context);
         val mSpeechRecognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
         mSpeechRecognizerIntent.putExtra(
@@ -125,7 +160,7 @@ class SearchActivity : AppCompatActivity() {
                 MotionEvent.ACTION_UP -> {
                     mSpeechRecognizer.stopListening()
                     editSearch.hint = "Hold and speak"
-//                    Toast.makeText(this, "NOW SEARCH !", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(view.context, "NOW SEARCH !", Toast.LENGTH_SHORT).show()
                     var query : Query = dbRef.orderByChild("name").startAt(editSearch.text.toString()).endAt(editSearch.text.toString()+"\uf8ff")
                     query.addListenerForSingleValueEvent(valueEventListener)
                 }
@@ -142,34 +177,59 @@ class SearchActivity : AppCompatActivity() {
         }
         //===============================================================================================================================================
         //===============================================================================================================================================
+
+
+        return view
     }
+
     var valueEventListener: ValueEventListener = object : ValueEventListener {
+        @RequiresApi(Build.VERSION_CODES.M)
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             prodList.clear()
+
             if (dataSnapshot.exists()) {
                 for (snapshot in dataSnapshot.children) {
                     val prod: Product? = snapshot.getValue(Product::class.java)
                     if(prod!=null){
                         prodList.add(prod)
                         idList.add(snapshot.key.toString())
+                        Log.d("ASD","3")
 //                        Toast.makeText(this@MainActivity, snapshot.key.toString(), Toast.LENGTH_SHORT).show()
-                        fetchImage(snapshot.key.toString())
+//                        fetchImage(snapshot.key.toString())
                     }else{
-                        Toast.makeText(this@SearchActivity, "Snapshot returned null !", Toast.LENGTH_SHORT).show()
+                        if(view==null){
+                            Log.e("Error", "View is null")
+                        }
+                        Toast.makeText(view?.context, "Snapshot returned null !", Toast.LENGTH_SHORT).show()
                     }
                     searchBtn.visibility = View.VISIBLE
                     progressBar.visibility = View.INVISIBLE
                 }
                 prodAdapter.notifyDataSetChanged()
+            }else{
+                dialogBox("No Results found !", "Please try different keyword")
+                searchBtn.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
             }
         }
 
-        override fun onCancelled(databaseError: DatabaseError) {}
+        override fun onCancelled(databaseError: DatabaseError) {
+
+        }
     }
 
     fun fetchImage(id: String){
         var storRef = FirebaseStorage.getInstance().getReference("ProductImages")
-        val localFile: File = File(filesDir.path+"/ProductImages/"+id)
+        if(view==null){
+            Log.e("Error", "View is null")
+        }
+        if(view?.context==null){
+            Log.e("Error", "Context is null")
+        }
+        if(view?.context?.filesDir==null){
+            Log.e("Error", "Filesdir is null")
+        }
+        val localFile: File = File(view?.context?.filesDir?.path+"/ProductImages/"+id)
 //        val localFilePath: File = File(/ProductImages")
 
 //        localFilePath.mkdirs()
@@ -195,13 +255,19 @@ class SearchActivity : AppCompatActivity() {
                 // ...
             }).addOnFailureListener(OnFailureListener {
                 // Handle failed download
-                Toast.makeText(this, "Failed to store image file !"+it.message, Toast.LENGTH_SHORT).show()
+                if(view==null){
+                    Log.e("Error", "Null View")
+                }
+                Toast.makeText(view?.context, "Failed to store image file !"+it.message, Toast.LENGTH_SHORT).show()
                 // ...
             })
     }
     @RequiresApi(Build.VERSION_CODES.M)
     private fun askPerm(p0:String, p1:String){
-        val builder = AlertDialog.Builder(this@SearchActivity)
+        if(view==null){
+            Log.e("Error", "View is null")
+        }
+        val builder = AlertDialog.Builder(view?.context)
         builder.setTitle(p0)
         builder.setMessage(p1)
         builder.setIcon(android.R.drawable.ic_dialog_alert)
@@ -209,7 +275,26 @@ class SearchActivity : AppCompatActivity() {
             requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 101)
         }
         builder.setNegativeButton("No"){ dialogInterface, which: Int ->
-            Toast.makeText(this@SearchActivity, getString(R.string.denyPerm), Toast.LENGTH_LONG).show()
+            if(view==null){
+                Log.e("Error", "View is null")
+            }
+            Toast.makeText(view?.context, getString(R.string.denyPerm), Toast.LENGTH_LONG).show()
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun dialogBox(p0:String, p1:String){
+        if(view==null){
+            Log.e("Error", "View is null")
+        }
+        val builder = AlertDialog.Builder(view?.context)
+        builder.setIcon(R.drawable.sad_vector)
+        builder.setTitle(p0)
+        builder.setMessage(p1)
+//        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        builder.setNeutralButton("OK") { dialogInterface, which ->
         }
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)

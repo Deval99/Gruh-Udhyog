@@ -1,4 +1,4 @@
-package com.example.gruhudhyog
+package com.hunar.app
 
 import org.junit.Test
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -44,47 +43,37 @@
         android:layout_marginRight="64dp"
         android:text="NAME"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/etName"
+        app:layout_constraintEnd_toStartOf="@+id/etName"
+        app:layout_constraintTop_toTopOf="@+id/etName"
         app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/txtNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="NUMBER"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtName"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
-
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/countryC"
-        android:layout_width="64dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="52dp"
-        app:ccp_defaultNameCode="IN"
-        app:ccp_showFlag="false"
-        app:ccp_showNameCode="false"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"/>
 
     <TextView
         android:id="@+id/txtAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="48dp"
         android:text="ADDRESS"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtNum"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtNum"
-        app:layout_constraintTop_toBottomOf="@+id/txtNum" />
+        app:layout_constraintStart_toStartOf="@+id/txtName"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:maxLines="6"
+        android:minLines="6"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtAddr"
+        app:layout_constraintStart_toEndOf="@+id/txtAddr"
+        app:layout_constraintTop_toTopOf="@+id/txtAddr"
+        app:layout_constraintVertical_bias="0.235" />
 
     <TextView
         android:id="@+id/addAddr"
@@ -93,13 +82,13 @@
         android:layout_marginTop="20dp"
         android:text="ADD ANOTHER ADDRESS +"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/etAddress"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextMultiLine"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+        app:layout_constraintStart_toStartOf="@+id/etAddress"
+        app:layout_constraintTop_toBottomOf="@+id/etAddress" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -109,32 +98,6 @@
         app:layout_constraintHorizontal_bias="0.81"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="126dp"
-        android:layout_height="49dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="@+id/countryC"
-        app:layout_constraintStart_toEndOf="@+id/countryC"
-        app:layout_constraintTop_toTopOf="@+id/countryC" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:maxLines="6"
-        android:minLines="6"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPhone"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/countryC"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
     <Button
         android:id="@+id/editProfSbmt"

@@ -22,12 +22,15 @@
     <string name="askMicP">"You need to give permission to record audio in order to use Mic feature !"</string>
     <string name="denyPerm">As you have denied permission, Mic option is no longer available, However you can enable it from settings.</string>
     <string name="searchTxt">SEARCH FOR PRODUCT and SERVICES</string>
-    <string name="listening">Listening...</string>
+    <string name="listening">Listening…</string>
     <string name="holdSpk">Hold mic button and speak</string>
     <string name="title_activity_options_left">OptionsLeft</string>
     <string name="nv_hlpfb"><![CDATA[HELP & FEEDBACK]]></string>
     <string name="nv_prpo">PRIVACY POLICY</string>
     <string name="nv_logout">LOG OUT</string>
     <string name="nv_abtus">ABOUT US</string>
-
+    <string name="catBtnFood"><![CDATA[Food & Snacks]]></string>
+    <string name="beauty_and_health"><![CDATA[Beauty & Health]]></string>
+    <string name="puja_spiritual"><![CDATA[Puja & Spiritual]]></string>
+    <string name="db_category_pickle"><![CDATA[Pickles, Masala & Chutneys]]></string>
 </resources>

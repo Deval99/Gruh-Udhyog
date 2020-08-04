@@ -1,17 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".SearchActivity">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/imageView61"
+        android:layout_width="390dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/search_bg" />
+
+    <ImageView
+        android:id="@+id/searchBtn1"
+        android:layout_width="38dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView61"
+        app:layout_constraintStart_toStartOf="@+id/imageView61"
+        app:layout_constraintTop_toTopOf="@+id/imageView61"
+        app:layout_constraintVertical_bias="0.472"
+        app:srcCompat="@drawable/search_mg" />
+
+    <ImageView
+        android:id="@+id/imageView81"
+        android:layout_width="46dp"
+        android:layout_height="44dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView61"
+        app:layout_constraintEnd_toEndOf="@+id/imageView61"
+        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView61"
+        app:layout_constraintVertical_bias="0.435"
+        app:srcCompat="@drawable/circle_blk" />
+
+    <EditText
+        android:id="@+id/editSearch1"
+        android:layout_width="285dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="@string/searchTxt"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#989898"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView61"
+        app:layout_constraintEnd_toEndOf="@+id/imageView61"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/imageView61"
+        app:layout_constraintTop_toTopOf="@+id/imageView61"
+        app:layout_constraintVertical_bias="0.488" />
+
+    <ImageButton
+        android:id="@+id/micBtn1"
+        android:layout_width="24dp"
+        android:layout_height="29dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView81"
+        app:layout_constraintEnd_toEndOf="@+id/imageView81"
+        app:layout_constraintStart_toStartOf="@+id/imageView81"
+        app:layout_constraintTop_toTopOf="@+id/imageView81"
+        app:srcCompat="@drawable/mic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Frag"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/recView"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView61" />
+
+    <ProgressBar
+        android:id="@+id/progressBar_dbSearch"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@+id/searchBtn1"
+        app:layout_constraintEnd_toEndOf="@+id/searchBtn1"
+        app:layout_constraintStart_toStartOf="@+id/searchBtn1"
+        app:layout_constraintTop_toTopOf="@+id/searchBtn1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
