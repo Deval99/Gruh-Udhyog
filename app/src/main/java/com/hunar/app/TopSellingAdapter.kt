@@ -29,7 +29,7 @@ class TopSellingAdapter(
         viewType: Int
     ): ProductViewHolder {
         val view: View =
-            LayoutInflater.from(mCtx).inflate(R.layout.topselling_product, parent, false)
+            LayoutInflater.from(mCtx).inflate(R.layout.product_list_layout, parent, false)
         return ProductViewHolder(view)
     }
 

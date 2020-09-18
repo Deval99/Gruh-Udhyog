@@ -7,6 +7,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         tools:openDrawer="end"
+
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,87 +24,12 @@
 
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/titleBarDb"
-            android:layout_width="match_parent"
-            android:layout_height="80sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/gruh2"
-                android:layout_width="89dp"
-                android:layout_height="53dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="right"
-                android:text="@string/gruh"
-                android:textColor="@android:color/black"
-                android:textSize="37sp"
-                app:layout_constraintBottom_toBottomOf="@+id/optLeftOpen"
-                app:layout_constraintStart_toEndOf="@+id/optLeftOpen"
-                app:layout_constraintTop_toTopOf="@+id/optLeftOpen"
-                app:layout_constraintVertical_bias="0.714" />
-
-            <TextView
-                android:id="@+id/udhyog2"
-                android:layout_width="128dp"
-                android:layout_height="52dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left"
-                android:text="@string/udhyog"
-                android:textColor="@android:color/black"
-                android:textSize="37sp"
-                app:layout_constraintBottom_toBottomOf="@+id/gruh2"
-                app:layout_constraintStart_toEndOf="@+id/gruh2"
-                app:layout_constraintTop_toTopOf="@+id/gruh2"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <ImageView
-                android:id="@+id/optLeftOpen"
-                android:layout_width="46dp"
-                android:layout_height="39dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/titleBarDb"
-                app:layout_constraintStart_toStartOf="@+id/titleBarDb"
-                app:layout_constraintTop_toTopOf="@+id/titleBarDb"
-                app:layout_constraintVertical_bias="0.512"
-                app:srcCompat="@drawable/menu" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="57dp"
-                android:layout_height="67dp"
-                android:layout_marginStart="23dp"
-                android:layout_marginLeft="23dp"
-                app:layout_constraintBottom_toBottomOf="@+id/udhyog2"
-                app:layout_constraintStart_toEndOf="@+id/udhyog2"
-                app:layout_constraintTop_toTopOf="@+id/udhyog2"
-                app:layout_constraintVertical_bias="0.30"
-                app:srcCompat="@drawable/userbg" />
-
-            <ImageView
-                android:id="@+id/userProfIco"
-                android:layout_width="35dp"
-                android:layout_height="43dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
-                app:srcCompat="@drawable/user" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <FrameLayout
             android:id="@+id/db_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80sp"
+            android:layout_marginTop="0sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -112,16 +38,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemIconTint="#000"
+            app:itemTextColor="#000"
             android:id="@+id/db_bot_nav_layout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/db_bot_nav"
             android:background="@drawable/db_bot_nav_bg"
-            app:itemTextColor="#000"
             android:layout_marginBottom="17sp"
             android:layout_marginLeft="60sp"
             android:layout_marginRight="60sp"
+            android:theme="@style/Widget.BottomNavigationView"
             />
 
 <!--        <Button-->
@@ -145,8 +72,10 @@
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             app:theme="@style/Drawer"
+
             android:layout_width="190dp"
             android:layout_height="match_parent"
+            android:theme="@style/SideNavigationBar"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             android:layout_marginTop="20sp"
@@ -155,6 +84,7 @@
             app:itemMaxLines="2"
             app:itemTextColor="#FFFFFF"
             app:itemIconSize="0dp"
+
             android:background="#000000"
             >
 
@@ -170,12 +100,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
+                    android:layout_marginBottom="5sp"
                     android:textSize="18sp"
                     android:text="@string/nv_logout"
                     android:paddingBottom="15dp"/>
                 <TextView
                     android:id="@+id/nv_prpo"
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="5sp"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
                     android:textSize="18sp"
@@ -183,6 +115,7 @@
                     android:paddingBottom="15dp"/>
                 <TextView
                     android:id="@+id/nv_hlpfb"
+                    android:layout_marginBottom="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"
@@ -191,6 +124,7 @@
                     android:paddingBottom="15dp"/>
                 <TextView
                     android:id="@+id/nv_abtus"
+                    android:layout_marginBottom="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#FFF"

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
         var phoneNum = sharedPref.getString("loginNum", null)
-
+//        startActivity(Intent(this@MainActivity, AlgoliaTest::class.java))
         if(phoneNum==null){
             Log.d("TAG","ABCD")
             startActivity(Intent(this@MainActivity, LanguageSelect::class.java))

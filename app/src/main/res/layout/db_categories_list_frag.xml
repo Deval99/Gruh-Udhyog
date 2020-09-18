@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_category_cl"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/catActTitleImage"
+        android:layout_width="match_parent"
+        android:layout_height="80sp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/catActTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/assistant_extra_light"
+        android:text="All Categories"
+        android:textColor="#000"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/catActTitleImage"
+        app:layout_constraintEnd_toEndOf="@+id/catActTitleImage"
+        app:layout_constraintStart_toStartOf="@+id/catActTitleImage"
+        app:layout_constraintTop_toTopOf="@+id/catActTitleImage"
+        app:layout_constraintVertical_bias="0.457" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/catFrag_recView"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="85sp"
+        android:layout_marginTop="15sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catActTitle"
+        app:layout_constraintVertical_bias="1" />
+
+    <TextView
+        android:id="@+id/catActNoRecFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="No Products found !"
+        android:textSize="25sp"
+        android:visibility="invisible"
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catActTitleImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,4 +9,15 @@
     <style name="Drawer">
         <item name="android:textSize">17dp</item>
     </style>
+
+    <style name="Widget.BottomNavigationView"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/arial_regular</item>
+    </style>
+
+    <style name="SideNavigationBar"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/assistant_semi_bold</item>
+    </style>
+
 </resources>

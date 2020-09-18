@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hunar.app">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -8,21 +9,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        tools:replace="android:theme"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".getUserInfo"></activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".getUserInfo" />
         <activity android:name=".SubmitOrder" />
-        <activity android:name=".SearchActivity" /> <!-- android:name="android.support.v4.content.FileProvider" -->
         <activity android:name=".EditProfile" />
         <activity
             android:name=".Dashboard"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".submitOtp" />
-        <activity android:name=".getPhnum" />
+        <activity android:name=".GetPhnum" />
         <activity android:name=".LanguageSelect" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -5,11 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_get_phnum.*
 
-class getPhnum : AppCompatActivity() {
+class GetPhnum : AppCompatActivity() {
     lateinit var sharedPref : SharedPreferences
     lateinit var sharedPrefEdit : SharedPreferences.Editor
 
@@ -25,25 +23,25 @@ class getPhnum : AppCompatActivity() {
 //            Toast.makeText(this, phoneNumber, Toast.LENGTH_SHORT).show()
 
 
-            var inte = Intent(this@getPhnum, submitOtp::class.java)
+            var inte = Intent(this@GetPhnum, submitOtp::class.java)
             inte.putExtra("pn",phoneNumber)
             startActivity(inte)
         }
         skip.setOnClickListener{
-            startActivity(Intent(this@getPhnum, Dashboard::class.java))
+            startActivity(Intent(this@GetPhnum, Dashboard::class.java))
         }
 
         loginFake.setOnClickListener{
             sharedPrefEdit.putString("loginNum", "+919512492862")
             sharedPrefEdit.commit()
 
-            var inte = Intent(this@getPhnum, Dashboard::class.java)
+            var inte = Intent(this@GetPhnum, Dashboard::class.java)
             inte.putExtra("pn","+919512492862")
             startActivity(inte)
         }
     }
 
     override fun onBackPressed() {
-        Toast.makeText(this, this.getString(R.string.restart_app), Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

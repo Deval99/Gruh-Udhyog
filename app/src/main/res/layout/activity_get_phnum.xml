@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".getPhnum">
+    tools:context=".GetPhnum">
 
     <ImageView
-        android:layout_width="413dp"
-        android:layout_height="803dp"
-        android:layout_marginBottom="184dp"
-        android:contentDescription="@string/bgImage"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="328sp"
+        android:src="@drawable/blk_elipse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/blk_elipse" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -38,7 +36,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:text="@string/udhyog"
+        android:text="-"
         android:textColor="@android:color/white"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"

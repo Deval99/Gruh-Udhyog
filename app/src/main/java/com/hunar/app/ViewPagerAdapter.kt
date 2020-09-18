@@ -53,6 +53,9 @@ class ViewPagerAdapter(
 
         imgName.text = strMealName
         view.setOnClickListener { v: View? ->
+            if(clickListener==null){
+                return@setOnClickListener
+            }
             clickListener!!.onClick(
                 v,
                 position

@@ -13,8 +13,8 @@ package com.hunar.app
 //productCategories
 
 
-class Product(val prodCategory: String, val prodName : String, val prodImg: String, val prodDesc: String, val prodPrice: String, val keywords: kwArray, val sellerId: String, val delivered: String, val verif: String, val rating: ProdReview){
-    constructor() : this("", "", "","","", kwArray(),"","","", ProdReview()){
+class Product(val prodCategory: String, val prodName : String, val prodImg: String, val prodDesc: String, val prodPrice: String, val keywords: String, val sellerId: String, var quantity: Int){
+    constructor() : this("", "", "","","", "","", 0){
 
     }
 }

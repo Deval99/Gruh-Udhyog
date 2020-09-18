@@ -2,7 +2,6 @@
 <resources>
     <string name="reglog">જોડાઓ / પ્રવેશ કરો</string>
     <string name="gruh">ગૃહ</string>
-    <string name="udhyog">ઉધૉગ</string>
     <string name="skip">અવગણો</string>
     <string name="restart_app">એપ ને ફરી થી ખોલો !</string>
     <string name="enterPhn">તમારો ફોન નંબર લખો</string>

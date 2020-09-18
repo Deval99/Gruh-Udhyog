@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".submitOtp">
+
+    <ImageView
+        android:id="@+id/regTopBg"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:contentDescription="@string/bgImage"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blk_eclipse_half" />
+
+    <TextView
+        android:id="@+id/regRegText"
+        android:layout_width="237dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="104dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="REGISTER"
+        android:textColor="#5EB988"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/regNameTxt"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Enter Name"
+        android:textColor="#5EB988"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regRegText" />
+
+    <ImageView
+        android:id="@+id/regNameBg"
+        android:layout_width="wrap_content"
+        android:layout_height="45sp"
+        android:visibility="invisible"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/reg_field_rect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regNameTxt" />
+
+    <EditText
+        android:id="@+id/regNameETxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:padding="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/regNameBg"
+        app:layout_constraintEnd_toEndOf="@+id/regNameBg"
+        app:layout_constraintStart_toStartOf="@+id/regNameBg"
+        app:layout_constraintTop_toTopOf="@+id/regNameBg"
+        android:background="@drawable/reg_field_bg"/>
+
+
+    <TextView
+        android:id="@+id/regAddrTxt"
+        android:layout_width="151dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="172dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Enter Address"
+        android:textColor="#5EB988"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regRegText" />
+
+    <ImageView
+        android:id="@+id/regAddrBg"
+        android:layout_width="wrap_content"
+        android:layout_height="85sp"
+        android:visibility="invisible"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/reg_field_addr_rect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regAddrTxt" />
+
+    <EditText
+        android:id="@+id/regAddrETxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:ems="10"
+        android:lines="3"
+        android:padding="10sp"
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="@+id/regAddrBg"
+        app:layout_constraintEnd_toEndOf="@+id/regAddrBg"
+        app:layout_constraintStart_toStartOf="@+id/regAddrBg"
+        app:layout_constraintTop_toTopOf="@+id/regAddrBg"
+        android:background="@drawable/reg_field_bg"/>
+
+    <Button
+        android:id="@+id/regSubmit"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Submit"
+        android:textSize="25sp"
+        android:background="@drawable/reg_field_bg"
+        app:layout_constraintEnd_toEndOf="@+id/regAddrBg"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/regAddrBg"
+        app:layout_constraintTop_toBottomOf="@+id/regAddrBg" />
+
+    <TextView
+        android:id="@+id/regSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Skip"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/regSubmit"
+        app:layout_constraintStart_toStartOf="@+id/regSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/regSubmit" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,14 +22,13 @@ class SubmitOrder : AppCompatActivity() {
 
 
         db = FirebaseFirestore.getInstance()
-
         var user = FirebaseAuth.getInstance().currentUser
         if(user==null){
             Log.e("TAG", "User is null")
             finish()
             return
         }
-
+        Log.d("TAG", "A")
         var sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
 
         var loginNum = sharedPref.getString("loginNum", null)
@@ -38,14 +37,13 @@ class SubmitOrder : AppCompatActivity() {
             finish()
             return
         }
-
+        Log.d("TAG", "B")
         var userName = sharedPref.getString("userName", null)
         if(userName==null){
             val builder = AlertDialog.Builder(this)
             builder.setMessage("Please fill user details from Dashboard -> Upper right corner -> User icon")
                 .setPositiveButton("Ok",
                     DialogInterface.OnClickListener { dialog, id ->
-                        // FIRE ZE MISSILES!
                         finish()
                     })
             val alertDialog = builder.create()
@@ -58,10 +56,10 @@ class SubmitOrder : AppCompatActivity() {
             //LoginNum
 
 
-            var productUid = "NZZ8bTdDOmKyqiSU5IyK"
-            var productQuantity = 1
-            var billingMethod = "Cash"
-            var shippingAddress = "Gokuldham Society, nepal"
+            var productUid = "DMPx91iDbjMkUbIt4tkX,NZZ8bTdDOmKyqiSU5IyK,gPCMunRf8Yla3VPliOmG,jNnHciXJPlMxQ6YX5SVM"
+            var productQuantity = "2,1,3,4"
+            var billingMethod = "GPay"
+            var shippingAddress = "Stark industries, nepal"
 
 
             //Upload new seller
@@ -102,7 +100,7 @@ class SubmitOrder : AppCompatActivity() {
                 "productName" to "",
                 "productCategory" to "",
                 "productPrice" to "",
-                "customerName" to "",
+                "customerName" to userName,
 
                 "quantity" to productQuantity,
                 "orderDate" to com.google.firebase.firestore.FieldValue.serverTimestamp(),
@@ -111,35 +109,62 @@ class SubmitOrder : AppCompatActivity() {
                 "shippingAddress" to shippingAddress,
 
                 "orderStatus" to "pending",
-                "orderTrack" to "pending"
+                "orderTrack" to "pending",
+                "userNumber" to loginNum
             )
-
-            db.collection("products").document(productUid).get()
+            db.collection("products").document(productUid.split(",")[0]).get()
                 .addOnSuccessListener() { productData ->
                     if (productData != null) {
-                        customerOrders["productName"] = productData.get("productName").toString()
+                        customerOrders["productName"] =
+                            productData.get("productName").toString()
                         customerOrders["productCategory"] =
                             productData.get("productCategory").toString()
-                        customerOrders["productPrice"] = productData.get("productPrice").toString()
+                        customerOrders["productPrice"] =
+                            productData.get("productPrice").toString()
                         customerOrders["userID"] = productData.get("userID").toString()
+                        var f = false
+                        var size = productUid.split(",").size
+                        size-=1
 
-                        db.collection("sellers").document(customerOrders["userID"].toString())
-                            .get()
-                            .addOnSuccessListener() { sellerData ->
-                                if (sellerData != null) {
-                                    customerOrders["sellerName"] =
-                                        sellerData.get("sellerName").toString()
-                                    placeOrder(customerOrders)
-                                } else {
-                                    Log.e("TAG", "Data Snapshot of seller is null !")
-                                }
+
+                        productUid.split(",").forEach{ productId ->
+                            if(f){
+
+                                db.collection("products").document(productId).get()
+                                    .addOnSuccessListener { productDataRem ->
+                                        customerOrders["productName"] = customerOrders["productName"].toString() + "," + productDataRem.get("productName").toString()
+                                        customerOrders["productCategory"] = customerOrders["productCategory"].toString() + "," + productDataRem.get("productCategory").toString()
+                                        customerOrders["productPrice"] = customerOrders["productPrice"].toString() + "," + productDataRem.get("productPrice").toString()
+                                        size-=1
+                                        if(size==0) {
+                                            db.collection("sellers").document(customerOrders["userID"].toString())
+                                                .get()
+                                                .addOnSuccessListener() { sellerData ->
+                                                    if (sellerData != null) {
+                                                        customerOrders["sellerName"] =
+                                                            sellerData.get("sellerName").toString()
+                                                        placeOrder(customerOrders)
+                                                    } else {
+                                                        Log.e("TAG", "Data Snapshot of seller is null !")
+                                                    }
+
+                                                }
+                                                .addOnFailureListener() {
+                                                    Log.e("Error", it.toString())
+                                                }
+                                        }
+                                    }
+                                    .addOnFailureListener{
+                                        Log.e("TAG", "Failed fetching other products")
+                                    }
                             }
-                            .addOnFailureListener() {
-                                Log.e("Error", it.toString())
-                            }
+                            f=true
+                        }
+
                     } else {
                         Log.e("TAG", "Data Snapshot of product is null !")
                     }
+
                 }
                 .addOnFailureListener() {
                     Log.e("TAG", it.toString())

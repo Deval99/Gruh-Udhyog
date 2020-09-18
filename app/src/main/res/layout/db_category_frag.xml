@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_category_cl"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/catActTitleImage"
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="250sp"
+        android:background="@drawable/act_cat_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/catActTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Wait !"
+        android:textColor="#FFF"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/catActTitleImage"
+        app:layout_constraintEnd_toEndOf="@+id/catActTitleImage"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toStartOf="@+id/catActTitleImage"
+        app:layout_constraintTop_toTopOf="@+id/catActTitleImage"
+        app:layout_constraintVertical_bias="0.933" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/actCat_recView"
+        android:layout_width="match_parent"
+        android:layout_height="440sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="0sp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="70sp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catActTitleImage" />
+
+    <TextView
+        android:id="@+id/catActNoRecFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="No Products found !"
+        android:textSize="25sp"
+        android:visibility="invisible"
+        android:textColor="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catActTitleImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

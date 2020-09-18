@@ -65,8 +65,8 @@ class EditProfile : AppCompatActivity() {
                     if(it.get("userName")!=null){
                         etName.setText(it.get("userName").toString())
                     }
-                    if(it.get("userAddress")!=null) {
-                        etAddress.setText(it.get("userAddress").toString())
+                    if(it.get("userAddr")!=null) {
+                        etAddress.setText(it.get("userAddr").toString())
                     }
                 }
 
@@ -165,14 +165,14 @@ class EditProfile : AppCompatActivity() {
                     .addOnSuccessListener { Log.d("TAG", "UserName Updated") }
                     .addOnFailureListener { Toast.makeText(this, "userName add Failed"+it.toString(), Toast.LENGTH_SHORT).show() }
                 db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).update(
-                    hashMapOf("userAddress" to etAddress.text.toString()) as Map<String, Any>
+                    hashMapOf("userAddr" to etAddress.text.toString()) as Map<String, Any>
                 )
                     .addOnSuccessListener { Log.d("TAG", "UserAddress Updated") }
                     .addOnFailureListener { Toast.makeText(this, "userAddress add Failed"+it.toString(), Toast.LENGTH_SHORT).show() }
 //                uploadFile()
                 var sharedPrefEdit = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE).edit()
                 sharedPrefEdit.putString("userName", etName.text.toString())
-                sharedPrefEdit.putString("userAddress", etAddress.text.toString())
+                sharedPrefEdit.putString("userAddr", etAddress.text.toString())
                 sharedPrefEdit.apply()
 
                 uploadFile()

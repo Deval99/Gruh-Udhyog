@@ -15,12 +15,10 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/skip"
+        android:layout_height="328sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blk_elipse" />
 
     <ImageView
@@ -139,7 +137,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:text="@string/udhyog"
+        android:text="-"
         android:textColor="@android:color/white"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="@+id/textView6"

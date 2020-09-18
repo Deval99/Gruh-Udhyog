@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="165dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="10sp"
+
+    android:layout_marginBottom="18sp"
+    android:layout_marginStart="17sp"
+    app:cardCornerRadius="19dp"
+    app:cardElevation="10sp"
+    >
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+
+<!--        >-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="103sp"
+            android:src="@drawable/temp_chocolates"
+            android:id="@+id/post_image"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="103sp"
+            android:background="@drawable/cat_item_shadow"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_title"
+            android:text="Chocolates"
+            android:shadowColor="#000"
+            android:fontFamily="@font/assistant_bold"
+            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:layout_marginTop="2sp"
+            android:layout_marginStart="9dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10sp"
+            />
+
+<!--    </LinearLayout>-->
+
+</androidx.cardview.widget.CardView>

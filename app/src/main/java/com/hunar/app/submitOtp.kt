@@ -38,7 +38,9 @@ class submitOtp : AppCompatActivity() {
         sharedPrefEdi = sharedPref.edit()
 
         var myIntent = getIntent()
-        phoneNumber = myIntent.getStringExtra("pn")
+        phoneNumber = myIntent.getStringExtra("pn") ?: return
+
+
         resendOtp.visibility = View.INVISIBLE
         submitOtp.setOnClickListener{
             val otp = editOtp.text.toString()
@@ -67,28 +69,34 @@ class submitOtp : AppCompatActivity() {
                     .addOnSuccessListener { userSnapshot ->
                         if(userSnapshot.get("userName")==null){
                             Log.e("TAG", "userName is null (No user data available) Adding Data (Default type is Customer)")
-
                             db.collection("users").document(FirebaseAuth.getInstance().uid.toString()).set(
                                 hashMapOf("userPhoneNum" to phoneNumber, "userType" to "customer"))
-                                .addOnSuccessListener { Log.d("TAG", "Adding user in db is successful") }
+                                .addOnSuccessListener {
+                                    Log.d("TAG", "Adding user in db is successful")
+                                    sharedPrefEdi.putString("loginNum", phoneNumber)
+                                    sharedPrefEdi.commit()
+                                    startActivity(Intent(this, RegistrationActivity::class.java))
+                                    return@addOnSuccessListener
+                                }
                                 .addOnFailureListener { Log.e("TAG", "Adding user in db failed !$it") }
                         }else{
                             sharedPrefEdi.putString("userName", userSnapshot.get("userName").toString())
-                            sharedPrefEdi.putString("userAddress", userSnapshot.get("userAddress").toString())
+                            sharedPrefEdi.putString("userAddr", userSnapshot.get("userAddr").toString())
+                            sharedPrefEdi.putString("loginNum", phoneNumber)
                             sharedPrefEdi.commit()
+
+                            Toast.makeText(this, "Login Success !", Toast.LENGTH_SHORT).show()
+//                val user = task.result?.user
+                            // ...
+                            startActivity(Intent(this, Dashboard::class.java))
                         }
                     }
                     .addOnFailureListener {
                         Log.e("TAG", "Getting users failed ! $it")
+                        Toast.makeText(this, "Unable to access database", Toast.LENGTH_SHORT).show()
                     }
 
-                sharedPrefEdi.putString("loginNum", phoneNumber)
-                sharedPrefEdi.commit()
 
-                Toast.makeText(this, "Login Success !", Toast.LENGTH_SHORT).show()
-//                val user = task.result?.user
-                // ...
-                startActivity(Intent(this, Dashboard::class.java))
                 //============================================================================================================================================+ACTIVATE THIS !!!!!
             } else {
                 // Sign in failed, display a message and update the UI

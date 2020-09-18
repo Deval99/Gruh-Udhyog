@@ -2,7 +2,6 @@
 <resources>
     <string name="reglog">जुड़िये / प्रवेश कीजिए</string>
     <string name="gruh">गृह</string>
-    <string name="udhyog">उद्योग</string>
     <string name="skip">ऐसे ही आगे बढ़े</string>
     <string name="restart_app">एप को वापिस खोले !</string>
     <string name="enterPhn">आपका फोन नंबर डाले</string>

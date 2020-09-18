@@ -2,72 +2,65 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/db_search"
     android:layout_width="match_parent"
-    android:layout_height="0.1dp"
+    android:layout_marginStart="15sp"
+    android:layout_marginEnd="15sp"
+    android:layout_marginTop="100sp"
+    android:layout_height="50sp"
     app:layout_constraintTop_toTopOf="parent"
-    android:background="#C0C0C0"
+    android:background="#00FFFFFF"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ImageView
+    <View
         android:id="@+id/db_search_bg"
-        android:layout_width="390dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search_bg" />
+        android:background="@drawable/reg_field_rect" />
 
     <ImageView
         android:id="@+id/searchBtn"
         android:layout_width="38dp"
-        android:layout_height="28dp"
+        android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
         app:layout_constraintStart_toStartOf="@+id/db_search_bg"
         app:layout_constraintTop_toTopOf="@+id/db_search_bg"
         app:layout_constraintVertical_bias="0.472"
-        app:srcCompat="@drawable/search_mg" />
+        app:srcCompat="@drawable/searchbar_icon" />
 
     <ImageView
-        android:id="@+id/db_search_circleblk"
-        android:layout_width="46dp"
-        android:layout_height="44dp"
+        android:id="@+id/micBtn"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
         app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
         app:layout_constraintHorizontal_bias="0.982"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/db_search_bg"
         app:layout_constraintVertical_bias="0.435"
-        app:srcCompat="@drawable/circle_blk" />
+        app:srcCompat="@drawable/mic_icon" />
 
     <EditText
         android:id="@+id/editSearch"
         android:layout_width="285dp"
         android:layout_height="40dp"
         android:ems="10"
+        android:background="#00FFFFFF"
         android:hint="@string/searchTxt"
         android:inputType="textPersonName"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textColorHint="#989898"
-        android:textSize="16sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
         app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/db_search_bg"
         app:layout_constraintTop_toTopOf="@+id/db_search_bg"
-        app:layout_constraintVertical_bias="0.488" />
-
-    <ImageButton
-        android:id="@+id/micBtn"
-        android:layout_width="24dp"
-        android:layout_height="29dp"
-        android:background="#00FFFFFF"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="@+id/db_search_circleblk"
-        app:layout_constraintEnd_toEndOf="@+id/db_search_circleblk"
-        app:layout_constraintStart_toStartOf="@+id/db_search_circleblk"
-        app:layout_constraintTop_toTopOf="@+id/db_search_circleblk"
-        app:srcCompat="@drawable/mic" />
+        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

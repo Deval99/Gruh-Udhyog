@@ -36,7 +36,7 @@ class LanguageSelect : AppCompatActivity() {
             setAppLocale("en")
         }
         regText.setOnClickListener{
-            startActivity(Intent(this@LanguageSelect, getPhnum::class.java))
+            startActivity(Intent(this@LanguageSelect, GetPhnum::class.java))
         }
         skip.setOnClickListener{
             startActivity(Intent(this@LanguageSelect, Dashboard::class.java))
