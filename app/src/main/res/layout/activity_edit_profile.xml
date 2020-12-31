@@ -8,8 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="160sp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,31 +40,30 @@
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
+        android:layout_marginTop="40dp"
         android:text="NAME"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etName"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/etName"
-        app:layout_constraintTop_toTopOf="@+id/etName"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfIconBg" />
 
     <TextView
         android:id="@+id/txtAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="76dp"
         android:text="ADDRESS"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="@+id/txtName"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/etAddress"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <EditText
         android:id="@+id/etAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
@@ -71,9 +71,11 @@
         android:minLines="6"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtAddr"
-        app:layout_constraintStart_toEndOf="@+id/txtAddr"
-        app:layout_constraintTop_toTopOf="@+id/txtAddr"
-        app:layout_constraintVertical_bias="0.235" />
+        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtAddr" />
 
     <TextView
         android:id="@+id/addAddr"
@@ -81,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="ADD ANOTHER ADDRESS +"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/etAddress"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etAddress"
@@ -91,23 +93,22 @@
         android:id="@+id/etName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginEnd="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.81"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtName" />
 
     <Button
         android:id="@+id/editProfSbmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:text="Submit"
-        app:layout_constraintEnd_toEndOf="@+id/addAddr"
-        app:layout_constraintHorizontal_bias="0.272"
-        app:layout_constraintStart_toStartOf="@+id/addAddr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addAddr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

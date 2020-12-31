@@ -125,7 +125,7 @@ class Dashboard : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
 
     private fun toggleSearch(height: Int, orientation: String):String{
         if(height>0) {
-
+//            Toast.makeText(this, "height="+height, Toast.LENGTH_SHORT).show()
             if (supportFragmentManager.findFragmentByTag("OverlapFrag") == null) {
 
                 var overlapFrag = OverlapFrag(
@@ -256,6 +256,10 @@ class Dashboard : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
         builder.setNegativeButton("No"){ dialogInterface, which: Int ->
             Toast.makeText(this, getString(R.string.denyPerm), Toast.LENGTH_LONG).show()
+            sharedPref = getSharedPreferences("com.hunar.app", Context.MODE_PRIVATE)
+            sharedPrefEdit = sharedPref.edit()
+            sharedPrefEdit.putString("mic", "false")
+            sharedPrefEdit.apply()
         }
         val alertDialog: AlertDialog = builder.create()
         alertDialog.setCancelable(false)

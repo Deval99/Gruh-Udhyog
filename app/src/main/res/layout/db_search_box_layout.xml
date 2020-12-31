@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_marginStart="15sp"
     android:layout_marginEnd="15sp"
-    android:layout_marginTop="100sp"
+    android:layout_marginTop="102sp"
     android:layout_height="50sp"
     app:layout_constraintTop_toTopOf="parent"
     android:background="#00FFFFFF"
@@ -33,10 +33,12 @@
         app:layout_constraintVertical_bias="0.472"
         app:srcCompat="@drawable/searchbar_icon" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/micBtn"
         android:layout_width="40dp"
         android:layout_height="35dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/search_bar_mic_bg"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
         app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
         app:layout_constraintHorizontal_bias="0.982"
@@ -47,19 +49,19 @@
 
     <EditText
         android:id="@+id/editSearch"
-        android:layout_width="285dp"
+        android:layout_width="0sp"
         android:layout_height="40dp"
-        android:ems="10"
         android:background="#00FFFFFF"
+        android:ems="10"
         android:hint="@string/searchTxt"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textColorHint="#989898"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
-        app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
+        app:layout_constraintEnd_toStartOf="@+id/micBtn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/db_search_bg"
+        app:layout_constraintStart_toEndOf="@+id/searchBtn"
         app:layout_constraintTop_toTopOf="@+id/db_search_bg"
         app:layout_constraintVertical_bias="0.3" />
 

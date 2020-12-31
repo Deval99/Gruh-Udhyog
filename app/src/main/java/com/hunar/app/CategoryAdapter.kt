@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hunar.app.CategoryAdapter.ViewHolder
 
-class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val values: ArrayList<Categories>, val context: Context) :
+class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val values: ArrayList<Categories>?, val context: Context?,val type: String?) :
     RecyclerView.Adapter<ViewHolder>() {
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -31,11 +31,17 @@ class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val
     }
 
     fun add(position: Int, item: Categories) {
+        if(values==null)
+            return
+
         values.add(position, item)
         notifyItemInserted(position)
     }
 
     fun remove(position: Int) {
+        if(values==null)
+            return
+
         values.removeAt(position)
         notifyItemRemoved(position)
     }
@@ -49,8 +55,15 @@ class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val
         val inflater = LayoutInflater.from(
             parent.context
         )
-        val v: View = inflater.inflate(R.layout.category_card_view, parent, false)
-        // set the view's size, margins, paddings and layout parameters
+        val v: View
+        if(type=="CL") {
+            v = inflater.inflate(R.layout.category_card_view, parent, false)
+        }else{
+            v = inflater.inflate(R.layout.db_category_card_view, parent, false)
+        }
+
+
+            // set the view's size, margins, paddings and layout parameters
         return ViewHolder(v)
     }
 
@@ -59,6 +72,9 @@ class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val
         holder: ViewHolder,
         position: Int
     ) {
+        if(supportFragmentManager==null || values==null || context==null || type==null){
+            return
+        }
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         val name = values[position].title
@@ -79,9 +95,11 @@ class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val
             if(supportFragmentManager==null){
                 return@setOnClickListener
             }
-            supportFragmentManager.beginTransaction().replace(
-                R.id.db_frag, CategoryFrag(supportFragmentManager, "", values[position])
-            ).commit()
+            var frag = supportFragmentManager.beginTransaction().replace(
+                R.id.db_frag, CategoryFrag(supportFragmentManager,"", values[position])
+            )
+            frag.addToBackStack("CategoryFrag")
+            frag.commit()
         }
 
         holder.post_image.setOnClickListener{
@@ -101,6 +119,8 @@ class CategoryAdapter(val supportFragmentManager: FragmentManager?,  private val
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int {
+        if(values==null)
+            return 0
         return values.size
     }
 }

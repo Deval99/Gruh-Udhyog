@@ -7,12 +7,14 @@
     tools:context=".submitOtp">
 
     <ImageView
+        android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="328sp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/bgImage"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blk_elipse" />
 
     <TextView
@@ -31,29 +33,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="273dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="center"
-        android:text="-"
-        android:textColor="@android:color/white"
-        android:textSize="70sp"
-        app:layout_constraintEnd_toEndOf="@+id/gruh"
-        app:layout_constraintStart_toStartOf="@+id/gruh"
-        app:layout_constraintTop_toBottomOf="@+id/gruh" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="257dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="344dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Enter OTP"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <EditText
         android:id="@+id/editOtp"
@@ -71,7 +60,7 @@
         android:id="@+id/submitOtp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
         app:layout_constraintHorizontal_bias="0.504"

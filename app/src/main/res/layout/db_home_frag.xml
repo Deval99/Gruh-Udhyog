@@ -142,18 +142,30 @@
                 android:id="@+id/topSellingTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="156dp"
+                android:fontFamily="@font/arial_bold"
+
                 android:gravity="left"
                 android:text="Top Selling"
-                android:fontFamily="@font/arial_bold"
                 android:textColor="#000000"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.075"
+                app:layout_constraintHorizontal_bias="0.107"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categoryBoxDb" />
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dbCategoryList"
+                android:layout_width="match_parent"
+                android:layout_height="125sp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt"
+                />
+
+            <!--<LinearLayout
                 android:id="@+id/categoryBoxDb"
                 android:layout_width="match_parent"
                 android:layout_height="125sp"
@@ -356,7 +368,7 @@
                         app:layout_constraintTop_toTopOf="@+id/catBtnSweet"
                         app:layout_constraintVertical_bias="0.0" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout> -->
 <!--                android:background="#A0A0A0"
                 android:orientation="horizontal"/> -->
 
@@ -383,6 +395,7 @@
                 android:layout_marginTop="23dp"
                 android:fontFamily="@font/arial_regular"
                 android:background="@drawable/sb_category_seeall"
+                android:elevation="40sp"
                 android:text="See All"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"

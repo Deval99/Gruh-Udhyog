@@ -30,15 +30,6 @@ class GetPhnum : AppCompatActivity() {
         skip.setOnClickListener{
             startActivity(Intent(this@GetPhnum, Dashboard::class.java))
         }
-
-        loginFake.setOnClickListener{
-            sharedPrefEdit.putString("loginNum", "+919512492862")
-            sharedPrefEdit.commit()
-
-            var inte = Intent(this@GetPhnum, Dashboard::class.java)
-            inte.putExtra("pn","+919512492862")
-            startActivity(inte)
-        }
     }
 
     override fun onBackPressed() {

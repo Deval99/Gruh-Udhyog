@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class SubmitOrder : AppCompatActivity() {
+
     lateinit var db: FirebaseFirestore
     fun placeOrder(orderInfo: HashMap<String, Any>){
         db.collection("customerOrders").add(orderInfo)
@@ -19,7 +20,6 @@ class SubmitOrder : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         db = FirebaseFirestore.getInstance()
         var user = FirebaseAuth.getInstance().currentUser

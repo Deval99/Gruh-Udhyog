@@ -15,25 +15,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="9"
+            android:weightSum="10"
+            android:gravity="center"
             android:background="@drawable/seller_list_bg"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/prodListImg"
-                android:layout_weight="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="15sp"
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="0sp"
-                android:layout_height="110sp"
-                android:src="@drawable/temp_khakhra3"/>
+                android:layout_height="80sp"
+
+                android:layout_weight="2.4"
+
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginStart="5sp"
+                android:elevation="40dp"
+                android:id="@+id/view2"
+                app:cardCornerRadius="40dp">
+
+                    <ImageView
+                        android:id="@+id/prodListImg"
+
+                        app:layout_constraintDimensionRatio="1:1"
+                        android:layout_gravity="center"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/noimg"/>
+
+            </androidx.cardview.widget.CardView>
             <LinearLayout
                 android:layout_width="0sp"
-                android:layout_weight="4"
+                android:layout_weight="4.4"
                 android:weightSum="1"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical"
-                android:layout_marginLeft="7sp"
+                android:layout_marginStart="2sp"
                 android:padding="7dp">
 
                 <TextView
@@ -68,10 +87,13 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0sp"
-                android:layout_margin="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="10sp"
+                android:layout_marginEnd="5sp"
+                android:layout_marginStart="5sp"
                 android:layout_gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="3.2"
                 android:orientation="vertical">
 
 

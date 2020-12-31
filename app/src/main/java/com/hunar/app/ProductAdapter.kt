@@ -2,6 +2,7 @@ package com.hunar.app
 
 //import android.support.v7.widget.RecyclerView
 
+
 import android.content.Context
 import android.util.ArrayMap
 import android.util.Log
@@ -18,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 
 
 //import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
@@ -28,13 +30,15 @@ class ProductAdapter(
     prodList: List<Product>,
     idList: List<String>,
     filesDir: String,
-    var map : ArrayMap<String, Int>
+    var seller: Seller
 ) :
 
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     private val artistList: List<Product> = prodList
     private val idListNew: List<String> = idList
     private val filesDir = filesDir
+    var qtyMap : ArrayMap<String, Int> = ArrayMap<String, Int>()
+    var prodMap : ArrayMap<String, Product> = ArrayMap<String, Product>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -67,7 +71,9 @@ class ProductAdapter(
         var sellerFragRecView = view.findViewById<RecyclerView>(R.id.sellerFragRecView)
 
 
-      //  var aList = ArrayList<String>()
+
+
+        //  var aList = ArrayList<String>()
 //        holder.textViewCategory.text = "Category: " + prod.category
 
 //        Log.d("ASD", "X"+prod.prodCategory)
@@ -96,21 +102,32 @@ class ProductAdapter(
 
                 var layoutParams = sellerFragRecView.layoutParams as ConstraintLayout.LayoutParams
                 //left, top, right, bottom
-                layoutParams.setMargins(spToPx(20, view.context), spToPx(7, view.context),spToPx(20, view.context),spToPx(153, view.context))
+                layoutParams.setMargins(
+                    spToPx(20, view.context), spToPx(7, view.context), spToPx(
+                        20,
+                        view.context
+                    ), spToPx(153, view.context)
+                )
                 sellerFragRecView.layoutParams = layoutParams
 
             }
-            map[id] = 1
+            qtyMap[id] = 1
+            prodMap[id] = prod
+            Log.e("QWE", id)
+            print(qtyMap)
         }
 
         holder.prodListPlusBtn.setOnClickListener{
             holder.prodListCountText.text = (holder.prodListCountText.text.toString().toInt()+1).toString()
             prodBottomPrice.text = (prodBottomPrice.text.toString().toInt()+prod.prodPrice.toInt()).toString()
-            if(map.contains(id)){
-                map[id] = map[id]!! + 1
+            if(qtyMap.contains(id)){
+                qtyMap[id] = qtyMap[id]!! + 1
             }else{
-                map[id] = 1
+                qtyMap[id] = 1
+                prodMap[id] = prod
             }
+            Log.e("QWE", id)
+            print(qtyMap)
         }
 
         holder.prodListMinBtn.setOnClickListener{
@@ -125,7 +142,8 @@ class ProductAdapter(
                 prodNumItems.text = (prodNumItems.text.toString().toInt()-1).toString()
 
 
-                map.remove(id)
+                qtyMap.remove(id)
+                prodMap.remove(id)
             }
             if(prodNumItems.text.toString()=="0"){
 
@@ -133,34 +151,58 @@ class ProductAdapter(
 
                 var layoutParams = sellerFragRecView.layoutParams as ConstraintLayout.LayoutParams
                 //left, top, right, bottom
-                layoutParams.setMargins(spToPx(20, view.context), spToPx(7, view.context),spToPx(20, view.context),spToPx(84, view.context))
+                layoutParams.setMargins(
+                    spToPx(20, view.context), spToPx(7, view.context), spToPx(
+                        20,
+                        view.context
+                    ), spToPx(84, view.context)
+                )
                 sellerFragRecView.layoutParams = layoutParams
 
-                map.clear()
+                qtyMap.clear()
+                prodMap.clear()
             }
-            if(map.contains(id) && map[id] != 0) {
-                map[id] = map[id]!! - 1
+            if(qtyMap.contains(id) && qtyMap[id] != 0) {
+                qtyMap[id] = qtyMap[id]!! - 1
             }
-            print(map)
+            Log.e("QWE", id)
+            print(qtyMap)
         }
-
+        view.findViewById<TextView>(R.id.sellerFragTitle).setOnClickListener{
+            print(qtyMap)
+        }
         holder.prodListPrice.text = "₹ "+ prod.prodPrice
 
-        var sellerFragViewCartBtn = view.findViewById<TextView>(R.id.sellerFragViewCartBtn)
-        sellerFragViewCartBtn.setOnClickListener{
-            var frag = supportFragmentManager.beginTransaction().replace(
-                R.id.db_frag, CartFrag(supportFragmentManager, map)
-            )
-            frag.addToBackStack("CartFrag")
-            frag.commit()
+        Log.e("TAG", prod.prodImg+"ZZZ")
+        if(prod.prodImg!="null") {
+            Glide.with(view.context).load(prod.prodImg).into(holder.prodListImg)
         }
-        var sellerFragViewCartIcon = view.findViewById<View>(R.id.sellerFragViewCartIcon)
-        sellerFragViewCartIcon.setOnClickListener{
-            var frag = supportFragmentManager.beginTransaction().replace(
-                R.id.db_frag, CartFrag(supportFragmentManager, map)
-            )
-            frag.addToBackStack("CartFrag")
-            frag.commit()
+        var sellerFragViewCartBtn = view.findViewById<TextView>(R.id.sellerFragViewCartBtn)
+        if(sellerFragViewCartBtn!=null) {
+            sellerFragViewCartBtn.setOnClickListener {
+                            print(qtyMap)
+
+                //            for (x in prodMap){
+                //                Log.e("KEY", x.key)
+                //                Log.e("VAL", x.value.prodName)
+                //            }
+
+                var frag = supportFragmentManager.beginTransaction().replace(
+                    R.id.db_frag, CartFrag(supportFragmentManager, qtyMap, prodMap, seller)
+                )
+                frag.addToBackStack("CartFrag")
+                frag.commit()
+            }
+            var sellerFragViewCartIcon = view.findViewById<View>(R.id.sellerFragViewCartIcon)
+            sellerFragViewCartIcon.setOnClickListener {
+                            print(qtyMap)
+
+                var frag = supportFragmentManager.beginTransaction().replace(
+                    R.id.db_frag, CartFrag(supportFragmentManager, qtyMap, prodMap, seller)
+                )
+                frag.addToBackStack("CartFrag")
+                frag.commit()
+            }
         }
 
     }
@@ -168,7 +210,7 @@ class ProductAdapter(
     fun print(x: ArrayMap<String, Int>){
         Log.e("TAG", "==============")
         for(y in x){
-            Log.e("TAG", y.key+"======"+y.value)
+            Log.e("TAG", y.key + "======" + y.value)
         }
     }
 
@@ -198,6 +240,7 @@ class ProductAdapter(
         var prodListCountText : TextView
         var prodListPlusBtn : View
         var prodListPrice : TextView
+        var prodListImg : ImageView
 
         init {
             imgView = itemView.findViewById(R.id.prodListImg)
@@ -209,6 +252,7 @@ class ProductAdapter(
             prodListCountText = itemView.findViewById(R.id.prodListCountText)
             prodListPlusBtn = itemView.findViewById(R.id.prodListPlusBtn)
             prodListPrice = itemView.findViewById(R.id.prodListPrice)
+            prodListImg = itemView.findViewById<ImageView>(R.id.prodListImg)
             Log.d("TAG", "Init")
         }
     }

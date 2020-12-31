@@ -1,10 +1,9 @@
 package com.hunar.app
 
-import android.content.Context
-import android.util.ArrayMap
-import android.util.Log
 //import android.support.v7.widget.RecyclerView
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,9 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+
 
 class SellerAdapter(
     val supportFragmentManager: FragmentManager?,
@@ -45,10 +47,21 @@ class SellerAdapter(
 
 
         val id = idListNew[position]
-        val prod: Seller = artistList[position]
+        val seller: Seller = artistList[position]
 
-        Log.d("TAG", prod.sellerName)
-        holder.textViewName.setText(prod.sellerName)
+        Log.d("TAG", seller.sellerName)
+        holder.textViewName.setText(seller.sellerName)
+
+
+        var storageRef = FirebaseStorage.getInstance().reference
+        storageRef.child("UserProfilePicture/"+seller.sellerId+"/userProfilePhoto").getDownloadUrl()
+            .addOnSuccessListener{
+                Glide.with(mCtx).load(it).into(holder.prodImg)
+            }
+            .addOnFailureListener{
+                Log.e("ERR", "Image Fetch Error ! $it")
+            }
+
 
 
 //        holder.textViewCategory.text = "Category: " + prod.category
@@ -64,14 +77,14 @@ class SellerAdapter(
         holder.prodItem.setOnClickListener{
 
 //            Log.e("TAG", it.findViewById<TextView>(R.id.tv_name).text.toString())
-            Log.e("TAG", prod.sellerId)
+            Log.e("TAG", seller.sellerId)
             if(supportFragmentManager==null){
                 return@setOnClickListener
             }
             val frag = supportFragmentManager.beginTransaction().replace(
                 R.id.db_frag, SellerFrag(
                     supportFragmentManager,
-                    prod
+                    seller
                 )
             )
             frag.addToBackStack("SellerFrag")
@@ -86,11 +99,11 @@ class SellerAdapter(
     inner class SellerViewHolder(itemView: View) :
         ViewHolder(itemView) {
         var textViewName: TextView
-        var imgView: ImageView
+        var prodImg: ImageView
         var prodItem: CardView
 
         init {
-            imgView = itemView.findViewById(R.id.prodImg)
+            prodImg = itemView.findViewById(R.id.prodImg)
             textViewName = itemView.findViewById(R.id.tv_name)
             prodItem = itemView.findViewById(R.id.prodListItem)
             Log.d("TAG", "Init")

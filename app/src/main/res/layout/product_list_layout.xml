@@ -15,17 +15,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="9"
+            android:weightSum="9.5"
             android:background="@drawable/seller_list_bg"
             android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/prodListImg"
-                android:layout_weight="2"
-                android:layout_gravity="center"
-                android:layout_marginStart="15sp"
+            <LinearLayout
                 android:layout_width="0sp"
-                android:layout_height="110sp"
-                android:src="@drawable/circle_blk"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2.5" >
+                <androidx.cardview.widget.CardView
+                    android:layout_width="90sp"
+                    android:layout_height="90sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginEnd="0sp"
+                    android:id="@+id/view2"
+                    app:cardCornerRadius="40dp">
+
+                    <ImageView
+                        android:id="@+id/prodListImg"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/noimg"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0sp"
                 android:layout_weight="4"

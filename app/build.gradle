@@ -68,5 +68,4 @@ dependencies {
     implementation 'com.algolia:algoliasearch-android:3.27.0'
     implementation 'gun0912.ted:tedkeyboardobserver:1.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
-
 }

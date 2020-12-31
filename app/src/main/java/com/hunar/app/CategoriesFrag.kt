@@ -10,17 +10,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.algolia.search.saas.Client
-import com.algolia.search.saas.CompletionHandler
-import com.algolia.search.saas.Index
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.db_category_frag.*
-import kotlinx.android.synthetic.main.db_categories_list_frag.*
-import java.util.ArrayList
+import java.util.*
 
 class CategoriesFrag(val supportFragmentManager: FragmentManager?, val dashboard: Dashboard?) : Fragment(){
-    constructor() : this(null,null){
+    constructor() : this(null, null){
     }
 
     var prodList = ArrayList<Seller>()
@@ -48,11 +42,22 @@ class CategoriesFrag(val supportFragmentManager: FragmentManager?, val dashboard
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        list.add(Categories(document["categoryName"].toString(), "DESC_PENDING", document["categoryImage"].toString()))
+                        list.add(
+                            Categories(
+                                document["categoryName"].toString(),
+                                "DESC_PENDING",
+                                document["categoryImage"].toString()
+                            )
+                        )
 
                         Log.d("TAG", document.id + " => " + document["categoryName"])
                     }
-                    catFrag_recViewV.adapter = CategoryAdapter(supportFragmentManager, list, dashboard)
+                    catFrag_recViewV.adapter = CategoryAdapter(
+                        supportFragmentManager,
+                        list,
+                        dashboard,
+                        "CL"
+                    )
                 } else {
                     Log.d("TAG", "Error getting documents: ", task.exception)
                 }
@@ -62,6 +67,7 @@ class CategoriesFrag(val supportFragmentManager: FragmentManager?, val dashboard
         //recView.setLayoutManager(new LinearLayoutManager(this));
         //recView.setLayoutManager(new LinearLayoutManager(this));
         val mLayoutManager = GridLayoutManager(dashboard, 2)
+
         catFrag_recViewV.layoutManager = mLayoutManager
 
         return view

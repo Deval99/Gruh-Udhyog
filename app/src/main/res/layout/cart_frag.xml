@@ -1,19 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cart Pending !"
-        android:textColor="#000"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/cart_frag_title"
+        android:layout_width="364dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:text="Hunar Gruh Udhyog"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="33sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cart_title2"
+        android:layout_width="0sp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="25sp"
+        android:layout_marginEnd="25sp"
+        android:text="Items in your cart"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_frag_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cart_frag_recview"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10sp"
+        android:layout_marginBottom="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/totalText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cart_title2" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/cartSubmitBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/paymentMethodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:text="Payment Method"
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
+        android:text="Total Payable Amount"
+        android:textColor="#000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@id/totalValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totalValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="2sp"
+        android:text="0"
+        android:textColor="#000"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toTopOf="@+id/cartSubmitBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/totalValueSym"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="₹"
+        android:textColor="#000"
+        android:textSize="19sp"
+        android:padding="2sp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalValue"
+        app:layout_constraintStart_toEndOf="@+id/totalValue"
+        app:layout_constraintTop_toTopOf="@+id/totalValue"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/cartSubmitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_marginStart="20sp"
+        android:layout_marginEnd="20sp"
+        android:layout_marginBottom="84sp"
+        android:background="@drawable/sb_category_seeall"
+        android:fontFamily="@font/assistant_bold"
+        android:gravity="center"
+        android:text="Submit Order !"
+        android:textColor="#FFF"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

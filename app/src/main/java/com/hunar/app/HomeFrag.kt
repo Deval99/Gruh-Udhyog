@@ -14,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -22,8 +23,10 @@ import com.algolia.search.saas.CompletionHandler
 import com.algolia.search.saas.Index
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.db_home_frag.*
 import kotlinx.android.synthetic.main.db_home_frag.view.*
 import kotlinx.android.synthetic.main.db_search_frag.*
 import java.io.File
@@ -57,6 +60,30 @@ class HomeFrag(val supportFragmentManager: FragmentManager?, val dashboard: Dash
         if(dashboard==null){
             return abc
         }
+        var dbCategoryList = abc.findViewById<RecyclerView>(R.id.dbCategoryList)
+        val list: ArrayList<Categories> = ArrayList()
+        var db  = FirebaseFirestore.getInstance()
+        db.collection("categories")
+            .orderBy("categoryName")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        list.add(Categories(document["categoryName"].toString(), "DESC_PENDING", document["categoryImage"].toString()))
+
+                        Log.d("TAG", document.id + " => " + document["categoryName"])
+                    }
+                    dbCategoryList.adapter = CategoryAdapter(supportFragmentManager, list, dashboard, "HF")
+                } else {
+                    Log.d("TAG", "Error getting documents: ", task.exception)
+                }
+            }
+
+        dbCategoryList.setHasFixedSize(true)
+        //recView.setLayoutManager(new LinearLayoutManager(this));
+        //recView.setLayoutManager(new LinearLayoutManager(this));
+        val mLayoutManager = GridLayoutManager(dashboard, 2, RecyclerView.HORIZONTAL, false)
+        dbCategoryList.layoutManager = mLayoutManager
 
 
         val gruhText = abc.findViewById<TextView>(R.id.hunarTitle)
@@ -146,26 +173,26 @@ class HomeFrag(val supportFragmentManager: FragmentManager?, val dashboard: Dash
 
         db_topSellingRecView.adapter = prodAdapter
 
-        var catBtnArt = abc.findViewById<Button>(R.id.catBtnArt)
-        catBtnArt.setOnClickListener(LoadCategoryFrag("Art"))
-        var catBtnBeauty = abc.findViewById<Button>(R.id.catBtnBeauty)
-        catBtnBeauty.setOnClickListener(LoadCategoryFrag("Beauty & Health"))
-        var catBtnCraft = abc.findViewById<Button>(R.id.catBtnCraft)
-        catBtnCraft.setOnClickListener(LoadCategoryFrag("Craft"))
-        var catBtnFood = abc.findViewById<Button>(R.id.catBtnFood)
-        catBtnFood.setOnClickListener(LoadCategoryFrag("Food & Snacks"))
-        var catBtnGrocery = abc.findViewById<Button>(R.id.catBtnGrocery)
-        catBtnGrocery.setOnClickListener(LoadCategoryFrag("Grocery"))
-        var catBtnHome = abc.findViewById<Button>(R.id.catBtnHome)
-        catBtnHome.setOnClickListener(LoadCategoryFrag("Home Decor"))
-        var catBtnKids = abc.findViewById<Button>(R.id.catBtnKids)
-        catBtnKids.setOnClickListener(LoadCategoryFrag("Kids Zone"))
-        var catBtnPickle = abc.findViewById<Button>(R.id.catBtnPickle)
-        catBtnPickle.setOnClickListener(LoadCategoryFrag("Pickles,Masala & Chutneys"))
-        var catBtnPuja = abc.findViewById<Button>(R.id.catBtnPuja)
-        catBtnPuja.setOnClickListener(LoadCategoryFrag("Puja & Spiritual"))
-        var catBtnSweet = abc.findViewById<Button>(R.id.catBtnSweet)
-        catBtnSweet.setOnClickListener(LoadCategoryFrag("Sweets"))
+//        var catBtnArt = abc.findViewById<Button>(R.id.catBtnArt)
+//        catBtnArt.setOnClickListener(LoadCategoryFrag("Art"))
+//        var catBtnBeauty = abc.findViewById<Button>(R.id.catBtnBeauty)
+//        catBtnBeauty.setOnClickListener(LoadCategoryFrag("Beauty & Health"))
+//        var catBtnCraft = abc.findViewById<Button>(R.id.catBtnCraft)
+//        catBtnCraft.setOnClickListener(LoadCategoryFrag("Craft"))
+//        var catBtnFood = abc.findViewById<Button>(R.id.catBtnFood)
+//        catBtnFood.setOnClickListener(LoadCategoryFrag("Food & Snacks"))
+//        var catBtnGrocery = abc.findViewById<Button>(R.id.catBtnGrocery)
+//        catBtnGrocery.setOnClickListener(LoadCategoryFrag("Grocery"))
+//        var catBtnHome = abc.findViewById<Button>(R.id.catBtnHome)
+//        catBtnHome.setOnClickListener(LoadCategoryFrag("Home Decor"))
+//        var catBtnKids = abc.findViewById<Button>(R.id.catBtnKids)
+//        catBtnKids.setOnClickListener(LoadCategoryFrag("Kids Zone"))
+//        var catBtnPickle = abc.findViewById<Button>(R.id.catBtnPickle)
+//        catBtnPickle.setOnClickListener(LoadCategoryFrag("Pickles,Masala & Chutneys"))
+//        var catBtnPuja = abc.findViewById<Button>(R.id.catBtnPuja)
+//        catBtnPuja.setOnClickListener(LoadCategoryFrag("Puja & Spiritual"))
+//        var catBtnSweet = abc.findViewById<Button>(R.id.catBtnSweet)
+//        catBtnSweet.setOnClickListener(LoadCategoryFrag("Sweets"))
 
 
         //===================================================================================================================

@@ -9,10 +9,37 @@
         android:id="@+id/sellerDp"
         android:layout_width="match_parent"
         android:layout_height="164sp"
-        android:src="@drawable/temp_falguni"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hunar_landscape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- android:background="@drawable/bg_overlay" -->
+    <View
+        android:id="@+id/sellerDpShadow"
+        android:layout_width="match_parent"
+        android:layout_height="164sp"
+        android:background="@drawable/bg_overlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/sellerFragTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:fontFamily="@font/raleway_semibold"
+        android:inputType="textMultiLine"
+        android:text="Hunar Gruh Udhyog"
+        android:textColor="#FFF"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sellerDp"
+        app:layout_constraintEnd_toEndOf="@+id/sellerDp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/sellerDp"
+        app:layout_constraintTop_toTopOf="@+id/sellerDp"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -144,10 +171,12 @@
         app:layout_constraintVertical_bias="0.472"
         app:srcCompat="@drawable/searchbar_icon" />
 
-    <ImageView
-        android:id="@+id/micBtn"
+    <ImageButton
+        android:id="@+id/sellerMicBtn"
         android:layout_width="40dp"
         android:layout_height="35dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/search_bar_mic_bg"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
         app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
         app:layout_constraintHorizontal_bias="0.982"
@@ -158,19 +187,19 @@
 
     <EditText
         android:id="@+id/editSearch"
-        android:layout_width="285dp"
+        android:layout_width="0sp"
         android:layout_height="40dp"
-        android:ems="10"
         android:background="#00FFFFFF"
+        android:ems="10"
         android:hint="@string/searchTxt"
         android:inputType="textPersonName"
         android:textColor="#000000"
         android:textColorHint="#989898"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/db_search_bg"
-        app:layout_constraintEnd_toEndOf="@+id/db_search_bg"
+        app:layout_constraintEnd_toStartOf="@+id/sellerMicBtn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/db_search_bg"
+        app:layout_constraintStart_toEndOf="@+id/searchBtn"
         app:layout_constraintTop_toTopOf="@+id/db_search_bg"
         app:layout_constraintVertical_bias="0.3" />
 
@@ -191,8 +220,8 @@
         android:id="@+id/sellerFragRecView"
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:layout_marginStart="20sp"
-        android:layout_marginEnd="20sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
         android:layout_marginBottom="84sp"
         android:layout_marginTop="7sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -331,6 +360,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
